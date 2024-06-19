@@ -22,18 +22,17 @@ def button_action():  # 関数の定義 ※ボタンが押されたときの動�
     label1.config(text=f"{name_list}")  # 画面に出力
 
 
-def button_action2():
-    name = entry1.get()
-    li.append(name)
-    name_ran = random.randint(len(name))
-    label2.config(text=f"{name[name_ran]}")
+def button2_action():  # 関数の定義 ※ボタン2が押されたときの動き
+    count = len(li)
+    ram = random.randrange(count)
+    label2.config(text=li[ram])
 
 
 # 入力フィールドの作成
 entry1 = tk.Entry(window, bg=fg_color, fg=bg_color)
 entry1.pack(pady=10)
 
-# 追加ボタンの作成
+# ボタンの作成
 button1 = tk.Button(window, text="追加する", command=button_action)
 button1.pack(pady=10)
 
@@ -41,14 +40,13 @@ button1.pack(pady=10)
 label1 = tk.Label(window, text="名前を入力してください", bg=bg_color, fg=fg_color)
 label1.pack(pady=10)
 
-# ランダムボタンの作成
-button2 = tk.Button(window, text="ランダム選択", command=button_action2)
+# ボタン2の作成
+button2 = tk.Button(window, text="ランダム選択", command=button2_action)
 button2.pack(pady=10)
 
-# 出力ラベルの作成
-label2 = tk.Label(window, text="", bg=bg_color, fg=fg_color)
+# 出力ラベル2の作成
+label2 = tk.Label(window, text="ランダムな名前を表示", bg=bg_color, fg=fg_color)
 label2.pack(pady=10)
-
 # ↓↓↓ お約束のコード ↓↓↓
 window.mainloop()
 # ↑↑↑ お約束のコード ↑↑↑
