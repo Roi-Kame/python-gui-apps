@@ -24,13 +24,16 @@ str_list = [
 
 def button_action():  # 関数の定義 ※ボタンが押されたときの動き
     user_input = entry1.get()
+    # ランダムな数を作成
     count = len(str_list)
     ram = random.randrange(count)
     ram_list = str_list[ram]
+    # 合ってたら、入力をリセットして、リストから文章を削除
     if label1.cget("text") == user_input:
         label1.config(text=f"{ram_list}")
         str_list.pop(ram)
         entry1.delete(0, 10)
+    # リストの中身が一つになったら、クリアを出す
     if count == 1:
         label1.config(text="clear！おめでとう")
 
