@@ -16,6 +16,9 @@ window.configure(bg=bg_color)
 #             window, text="", command=lambda r=row, c=col: button_action(r, c)
 #         )
 
+# 同じボタンを押せないようにする
+# 勝利した瞬間、全てのボタンの機能をオフにする
+
 human_player = "O"
 ai_player = "X"
 current_player = human_player
@@ -61,65 +64,74 @@ def order_action():
 
 
 def button_action():  # 関数の定義 ※ボタンが押されたときの動き
-    button1.config(text=human_player)
+    if button1.cget("text") == "":
+        button1.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action2():  # 関数の定義 ※ボタンが押されたときの動き
-    button2.config(text=human_player)
+    if button2.cget("text") == "":
+        button2.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action3():  # 関数の定義 ※ボタンが押されたときの動き
-    button3.config(text=human_player)
+    if button3.cget("text") == "":
+        button3.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action4():  # 関数の定義 ※ボタンが押されたときの動き
-    button4.config(text=human_player)
+    if button4.cget("text") == "":
+        button4.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action5():  # 関数の定義 ※ボタンが押されたときの動き
-    button5.config(text=human_player)
+    if button5.cget("text") == "":
+        button5.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action6():  # 関数の定義 ※ボタンが押されたときの動き
-    button6.config(text=human_player)
+    if button6.cget("text") == "":
+        button6.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action7():  # 関数の定義 ※ボタンが押されたときの動き
-    button7.config(text=human_player)
+    if button7.cget("text") == "":
+        button7.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action8():  # 関数の定義 ※ボタンが押されたときの動き
-    button8.config(text=human_player)
+    if button8.cget("text") == "":
+        button8.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
 def button_action9():  # 関数の定義 ※ボタンが押されたときの動き
-    button9.config(text=human_player)
+    if button9.cget("text") == "":
+        button9.config(text=human_player)
+        ai_action()
     victory()
-    ai_action()
     ai_victory()
 
 
