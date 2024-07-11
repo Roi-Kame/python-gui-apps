@@ -10,8 +10,11 @@ fg_color = "#FFFFFF"  # 白
 window.configure(bg=bg_color)
 # ↑↑↑ お約束のコード ↑↑↑
 
+# O
 human_player = "O"
+# X
 ai_player = "X"
+# ai_action_check関数に使う
 check = ""
 
 
@@ -131,9 +134,7 @@ def order_action():
     coin = random.randint(1, 2)
     if coin == 1:
         label2.config(text="嬉しい！あなたが先手です")
-        label2.config(text="嬉しい！あなたが先手です")
     elif coin == 2:
-        label2.config(text="AIが先手です がんばって！")
         label2.config(text="AIが先手です がんばって！")
         ai_action()
 
@@ -169,7 +170,6 @@ def draw_check():
 
     else:
         label3.config(text="ドロー！")
-        draw_color()
         draw_color()
 
 
@@ -1416,6 +1416,7 @@ def ai_action_check():
         button5.config(text=ai_player)
 
 
+# ドロー時の、ボタンの色の設定
 def draw_color():
     button1.config(fg="#5f9ea0")
     button2.config(fg="#5f9ea0")
@@ -1428,12 +1429,13 @@ def draw_color():
     button9.config(fg="#5f9ea0")
 
 
+# ラベル１、タイトル
 label1 = tk.Label(window, text="円罰ゲーム", bg=bg_color, fg=fg_color)
 label1.pack(pady=10)
-# ラベル、行動順
+# ラベル２、行動順
 label2 = tk.Label(window, text="", bg=bg_color, fg=fg_color)
 label2.pack(pady=2)
-# ラベル、応援
+# ラベル３、応援
 label3 = tk.Label(window, text="スタート！", bg=bg_color, fg=fg_color)
 label3.pack(pady=2)
 # リセットボタン
