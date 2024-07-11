@@ -146,8 +146,9 @@ def ai_action():
 def order_action():
     coin = random.randint(1, 2)
     if coin == 1:
-        label1.config(text="嬉しい！あなたのターン")
+        label2.config(text="嬉しい！あなたが先手です")
     elif coin == 2:
+        label2.config(text="AIが先手です がんばって！")
         ai_action()
 
 
@@ -182,6 +183,7 @@ def draw_check():
 
     else:
         label3.config(text="ドロー！")
+        draw_color()
 
 
 def button_action():  # 関数の定義 ※ボタンが押されたときの動き
@@ -612,8 +614,7 @@ def riset():
     button7.config(fg="black")
     button8.config(fg="black")
     button9.config(fg="black")
-
-    label1.config(text="")
+    label3.config(text="スタート！")
     order_action()
 
 
@@ -1412,14 +1413,26 @@ def ai_action_check():
         button5.config(text=ai_player)
 
 
+def draw_color():
+    button1.config(fg="#5f9ea0")
+    button2.config(fg="#5f9ea0")
+    button3.config(fg="#5f9ea0")
+    button4.config(fg="#5f9ea0")
+    button5.config(fg="#5f9ea0")
+    button6.config(fg="#5f9ea0")
+    button7.config(fg="#5f9ea0")
+    button8.config(fg="#5f9ea0")
+    button9.config(fg="#5f9ea0")
+
+
 label1 = tk.Label(window, text="円罰ゲーム", bg=bg_color, fg=fg_color)
 label1.pack(pady=10)
 
-label2 = tk.Label(window, text="あなたは円です", bg=bg_color, fg=fg_color)
-label2.pack(pady=10)
+label2 = tk.Label(window, text="", bg=bg_color, fg=fg_color)
+label2.pack(pady=2)
 
 label3 = tk.Label(window, text="スタート！", bg=bg_color, fg=fg_color)
-label3.pack(pady=10)
+label3.pack(pady=2)
 
 riset_button = tk.Button(window, text="リセット", command=riset)
 riset_button.pack(pady=10)
