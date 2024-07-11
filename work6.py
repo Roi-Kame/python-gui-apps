@@ -10,28 +10,12 @@ fg_color = "#FFFFFF"  # 白
 window.configure(bg=bg_color)
 # ↑↑↑ お約束のコード ↑↑↑
 
-# for row in range(3):
-#     for col in range(3):
-#         button = tk.Button(
-#             window, text="", command=lambda r=row, c=col: button_action(r, c)
-#         )
-
-# AIを最強にする
-# 斜めの対角線に置くように調整する
-
-# ボタンを全てイメージで対応させる
-# イメージを小さくすると、画質が荒くて無理そう
-# 画質を上げれば解決するか？ただ読み込みが遅くなることが予想されるため、個人的にこだわらなくていいと思う
-# start = tk.PhotoImage(file="名称未設定-2.png")
-# small_img = start.subsample(1, 1)
-# ボタンの色変更はmacは不可
-# 環境に変化を加える必要があるため、他機では機能しない
 human_player = "O"
 ai_player = "X"
 check = ""
 
 
-# ボタンそれぞれにプレイヤー１の時◯、プレイヤー２の時バツの機能を追加
+# 通常時のAIの行動を設定
 def ai_action():
     if button5.cget("text") == "":
         button5.config(text=ai_player)
@@ -147,7 +131,9 @@ def order_action():
     coin = random.randint(1, 2)
     if coin == 1:
         label2.config(text="嬉しい！あなたが先手です")
+        label2.config(text="嬉しい！あなたが先手です")
     elif coin == 2:
+        label2.config(text="AIが先手です がんばって！")
         label2.config(text="AIが先手です がんばって！")
         ai_action()
 
@@ -184,9 +170,11 @@ def draw_check():
     else:
         label3.config(text="ドロー！")
         draw_color()
+        draw_color()
 
 
-def button_action():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン１が押されたら
+def button_action():
     if button1.cget("text") == "":
         button1.config(text=human_player)
         draw_check()
@@ -195,7 +183,8 @@ def button_action():  # 関数の定義 ※ボタンが押されたときの動�
         ai_victory()
 
 
-def button_action2():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン２が押されたら
+def button_action2():
     if button2.cget("text") == "":
         button2.config(text=human_player)
         draw_check()
@@ -204,7 +193,8 @@ def button_action2():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
-def button_action3():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン３が押されたら
+def button_action3():
     if button3.cget("text") == "":
         button3.config(text=human_player)
         draw_check()
@@ -213,7 +203,8 @@ def button_action3():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
-def button_action4():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン４が押されたら
+def button_action4():
     if button4.cget("text") == "":
         button4.config(text=human_player)
         draw_check()
@@ -222,7 +213,8 @@ def button_action4():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
-def button_action5():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン５が押されたら
+def button_action5():
     if button5.cget("text") == "":
         button5.config(text=human_player)
         draw_check()
@@ -231,7 +223,8 @@ def button_action5():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
-def button_action6():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン６が押されたら
+def button_action6():
     if button6.cget("text") == "":
         button6.config(text=human_player)
         draw_check()
@@ -240,7 +233,8 @@ def button_action6():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
-def button_action7():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン７が押されたら
+def button_action7():
     if button7.cget("text") == "":
         button7.config(text=human_player)
         draw_check()
@@ -249,7 +243,8 @@ def button_action7():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
-def button_action8():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン８が押されたら
+def button_action8():
     if button8.cget("text") == "":
         button8.config(text=human_player)
         draw_check()
@@ -258,7 +253,8 @@ def button_action8():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
-def button_action9():  # 関数の定義 ※ボタンが押されたときの動き
+# ボタン９が押されたら
+def button_action9():
     if button9.cget("text") == "":
         button9.config(text=human_player)
         draw_check()
@@ -267,6 +263,7 @@ def button_action9():  # 関数の定義 ※ボタンが押されたときの動
         ai_victory()
 
 
+# 勝利条件の設定と動き
 def victory():
     # 横１列目
     if (button1.cget("text"), button2.cget("text"), button3.cget("text")) == (
@@ -437,6 +434,7 @@ def victory():
         ai_action_check(False)
 
 
+# AI勝利時の動き
 def ai_victory():
     # 横１列目
     if (button1.cget("text"), button2.cget("text"), button3.cget("text")) == (
@@ -546,7 +544,7 @@ def ai_victory():
         button8.config(state="disabled")
 
         label3.config(text="AIの勝利！")
-    # 斜め１個目
+    # 斜め１列目
     if (button1.cget("text"), button5.cget("text"), button9.cget("text")) == (
         ai_player,
         ai_player,
@@ -564,7 +562,7 @@ def ai_victory():
         button8.config(state="disabled")
 
         label3.config(text="AIの勝利！")
-    # 斜め２個目
+    # 斜め２列目
     if (button3.cget("text"), button5.cget("text"), button7.cget("text")) == (
         ai_player,
         ai_player,
@@ -584,6 +582,7 @@ def ai_victory():
         label3.config(text="AIの勝利！")
 
 
+# リセット用の初期設定
 def riset():
     button1.config(text="")
     button2.config(text="")
@@ -618,6 +617,7 @@ def riset():
     order_action()
 
 
+# AIがリーチした時に、ラベル3のテキストを変更
 def ai_reach():
     # 横１列目
     if (button1.cget("text"), button2.cget("text"), button3.cget("text")) == (
@@ -796,6 +796,7 @@ def ai_reach():
         label3.config(text="AIがリーチ！")
 
 
+# AI強化合宿
 def ai_action_check():
     check = 0
 
@@ -1265,6 +1266,8 @@ def ai_action_check():
     ):
         check = 24
 
+    # checkの数字で行動を変化
+
     if check == 0:
         ai_action()
 
@@ -1427,13 +1430,13 @@ def draw_color():
 
 label1 = tk.Label(window, text="円罰ゲーム", bg=bg_color, fg=fg_color)
 label1.pack(pady=10)
-
+# ラベル、行動順
 label2 = tk.Label(window, text="", bg=bg_color, fg=fg_color)
 label2.pack(pady=2)
-
+# ラベル、応援
 label3 = tk.Label(window, text="スタート！", bg=bg_color, fg=fg_color)
 label3.pack(pady=2)
-
+# リセットボタン
 riset_button = tk.Button(window, text="リセット", command=riset)
 riset_button.pack(pady=10)
 
@@ -1469,6 +1472,7 @@ button8.grid(row=2, column=1, padx=2, pady=2)
 button9 = tk.Button(frame, text="", command=button_action9)
 button9.grid(row=2, column=2, padx=2, pady=2)
 
+# 行動順を決める
 order_action()
 
 # ↓↓↓ お約束のコード ↓↓↓
