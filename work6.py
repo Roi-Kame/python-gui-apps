@@ -16,123 +16,253 @@ window.configure(bg=bg_color)
 #             window, text="", command=lambda r=row, c=col: button_action(r, c)
 #         )
 
-# 同じボタンを押せないようにする
-# 勝利した瞬間、全てのボタンの機能をオフにする
+# AIを最強にする
+# 斜めの対角線に置くように調整する
 
+# ボタンを全てイメージで対応させる
+# イメージを小さくすると、画質が荒くて無理そう
+# 画質を上げれば解決するか？ただ読み込みが遅くなることが予想されるため、個人的にこだわらなくていいと思う
+# start = tk.PhotoImage(file="名称未設定-2.png")
+# small_img = start.subsample(1, 1)
+# ボタンの色変更はmacは不可
+# 環境に変化を加える必要があるため、他機では機能しない
 human_player = "O"
 ai_player = "X"
-current_player = human_player
+check = ""
 
 
 # ボタンそれぞれにプレイヤー１の時◯、プレイヤー２の時バツの機能を追加
 def ai_action():
-    if button1.cget("text") == "":
-        button1.config(text=ai_player)
-
-    elif button2.cget("text") == "":
-        button2.config(text=ai_player)
-
-    elif button3.cget("text") == "":
-        button3.config(text=ai_player)
-
-    elif button4.cget("text") == "":
-        button4.config(text=ai_player)
-
-    elif button5.cget("text") == "":
+    if button5.cget("text") == "":
         button5.config(text=ai_player)
+        draw_check()
 
-    elif button6.cget("text") == "":
-        button6.config(text=ai_player)
+    elif (
+        button3.cget("text"),
+        button7.cget("text"),
+        button2.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        button2.config(text=ai_player)
+        draw_check()
 
-    elif button7.cget("text") == "":
+    elif (
+        button1.cget("text"),
+        button9.cget("text"),
+        button2.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        button2.config(text=ai_player)
+        draw_check()
+
+    elif (
+        button1.cget("text"),
+        button8.cget("text"),
+        button7.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
         button7.config(text=ai_player)
+        draw_check()
 
-    elif button8.cget("text") == "":
-        button8.config(text=ai_player)
+    elif (
+        button3.cget("text"),
+        button8.cget("text"),
+        button9.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        button9.config(text=ai_player)
+        draw_check()
+
+    elif (
+        button6.cget("text"),
+        button7.cget("text"),
+        button9.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        button9.config(text=ai_player)
+        draw_check()
+
+    elif (
+        button6.cget("text"),
+        button8.cget("text"),
+        button9.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        button9.config(text=ai_player)
+        draw_check()
+
+    elif button1.cget("text") == "":
+        button1.config(text=ai_player)
+        draw_check()
 
     elif button9.cget("text") == "":
         button9.config(text=ai_player)
+        draw_check()
+
+    elif button7.cget("text") == "":
+        button7.config(text=ai_player)
+        draw_check()
+
+    elif button3.cget("text") == "":
+        button3.config(text=ai_player)
+        draw_check()
+
+    elif button2.cget("text") == "":
+        button2.config(text=ai_player)
+        draw_check()
+
+    elif button4.cget("text") == "":
+        button4.config(text=ai_player)
+        draw_check()
+
+    elif button6.cget("text") == "":
+        button6.config(text=ai_player)
+        draw_check()
+
+    elif button8.cget("text") == "":
+        button8.config(text=ai_player)
+        draw_check()
     ai_reach()
 
 
 def order_action():
     coin = random.randint(1, 2)
     if coin == 1:
-        current_player == human_player
+        label1.config(text="嬉しい！あなたのターン")
     elif coin == 2:
         ai_action()
+
+
+# 引き分けチェッカー
+def draw_check():
+    if button1.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button2.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button3.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button4.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button5.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button6.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button7.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button8.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    elif button9.cget("text") == "":
+        label3.config(text="ファイト！")
+
+    else:
+        label3.config(text="ドロー！")
 
 
 def button_action():  # 関数の定義 ※ボタンが押されたときの動き
     if button1.cget("text") == "":
         button1.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action2():  # 関数の定義 ※ボタンが押されたときの動き
     if button2.cget("text") == "":
         button2.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action3():  # 関数の定義 ※ボタンが押されたときの動き
     if button3.cget("text") == "":
         button3.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action4():  # 関数の定義 ※ボタンが押されたときの動き
     if button4.cget("text") == "":
         button4.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action5():  # 関数の定義 ※ボタンが押されたときの動き
     if button5.cget("text") == "":
         button5.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action6():  # 関数の定義 ※ボタンが押されたときの動き
     if button6.cget("text") == "":
         button6.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action7():  # 関数の定義 ※ボタンが押されたときの動き
     if button7.cget("text") == "":
         button7.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action8():  # 関数の定義 ※ボタンが押されたときの動き
     if button8.cget("text") == "":
         button8.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def button_action9():  # 関数の定義 ※ボタンが押されたときの動き
     if button9.cget("text") == "":
         button9.config(text=human_player)
-        ai_action()
-    victory()
-    ai_victory()
+        draw_check()
+        victory()
+        ai_action_check()
+        ai_victory()
 
 
 def victory():
@@ -142,56 +272,167 @@ def victory():
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ１")
+        button1.config(fg="#008000")
+        button2.config(fg="#008000")
+        button3.config(fg="#008000")
+
+        button4.config(state="disabled")
+        button5.config(state="disabled")
+        button6.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
+
     # 横２列目
     if (button4.cget("text"), button5.cget("text"), button6.cget("text")) == (
         human_player,
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ２")
+        button4.config(fg="#008000")
+        button5.config(fg="#008000")
+        button6.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
+
     # 横３列目
     if (button7.cget("text"), button8.cget("text"), button9.cget("text")) == (
         human_player,
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ３")
+        button7.config(fg="#008000")
+        button8.config(fg="#008000")
+        button9.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button4.config(state="disabled")
+        button5.config(state="disabled")
+        button6.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
+
     # 縦１列目
     if (button1.cget("text"), button4.cget("text"), button7.cget("text")) == (
         human_player,
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ４")
+        button1.config(fg="#008000")
+        button4.config(fg="#008000")
+        button7.config(fg="#008000")
+
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button5.config(state="disabled")
+        button6.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
+
     # 縦２列目
     if (button2.cget("text"), button5.cget("text"), button8.cget("text")) == (
         human_player,
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ５")
+        button2.config(fg="#008000")
+        button5.config(fg="#008000")
+        button8.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button3.config(state="disabled")
+        button4.config(state="disabled")
+        button6.config(state="disabled")
+        button7.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
+
     # 縦３列目
     if (button3.cget("text"), button6.cget("text"), button9.cget("text")) == (
         human_player,
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ６")
+        button3.config(fg="#008000")
+        button6.config(fg="#008000")
+        button9.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button4.config(state="disabled")
+        button5.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
+
     # 斜め１個目
     if (button1.cget("text"), button5.cget("text"), button9.cget("text")) == (
         human_player,
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ7")
+        button1.config(fg="#008000")
+        button5.config(fg="#008000")
+        button9.config(fg="#008000")
+
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button4.config(state="disabled")
+        button6.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
+
     # 斜め２個目
     if (button3.cget("text"), button5.cget("text"), button7.cget("text")) == (
         human_player,
         human_player,
         human_player,
     ):
-        label1.config(text="もう勝ちでいいよ8")
+        button3.config(fg="#008000")
+        button5.config(fg="#008000")
+        button7.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button4.config(state="disabled")
+        button6.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="勝利！")
+
+        ai_action_check(False)
 
 
 def ai_victory():
@@ -201,56 +442,144 @@ def ai_victory():
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ１")
+        button1.config(fg="#008000")
+        button2.config(fg="#008000")
+        button3.config(fg="#008000")
+
+        button4.config(state="disabled")
+        button5.config(state="disabled")
+        button6.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
     # 横２列目
     if (button4.cget("text"), button5.cget("text"), button6.cget("text")) == (
         ai_player,
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ２")
+        button4.config(fg="#008000")
+        button5.config(fg="#008000")
+        button6.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
     # 横３列目
     if (button7.cget("text"), button8.cget("text"), button9.cget("text")) == (
         ai_player,
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ３")
+        button7.config(fg="#008000")
+        button8.config(fg="#008000")
+        button9.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button4.config(state="disabled")
+        button5.config(state="disabled")
+        button6.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
     # 縦１列目
     if (button1.cget("text"), button4.cget("text"), button7.cget("text")) == (
         ai_player,
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ４")
+        button1.config(fg="#008000")
+        button4.config(fg="#008000")
+        button7.config(fg="#008000")
+
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button5.config(state="disabled")
+        button6.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
     # 縦２列目
     if (button2.cget("text"), button5.cget("text"), button8.cget("text")) == (
         ai_player,
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ５")
+        button2.config(fg="#008000")
+        button5.config(fg="#008000")
+        button8.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button3.config(state="disabled")
+        button4.config(state="disabled")
+        button6.config(state="disabled")
+        button7.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
     # 縦３列目
     if (button3.cget("text"), button6.cget("text"), button9.cget("text")) == (
         ai_player,
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ６")
+        button3.config(fg="#008000")
+        button6.config(fg="#008000")
+        button9.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button4.config(state="disabled")
+        button5.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
     # 斜め１個目
     if (button1.cget("text"), button5.cget("text"), button9.cget("text")) == (
         ai_player,
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ7")
+        button1.config(fg="#008000")
+        button5.config(fg="#008000")
+        button9.config(fg="#008000")
+
+        button2.config(state="disabled")
+        button3.config(state="disabled")
+        button4.config(state="disabled")
+        button6.config(state="disabled")
+        button7.config(state="disabled")
+        button8.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
     # 斜め２個目
     if (button3.cget("text"), button5.cget("text"), button7.cget("text")) == (
         ai_player,
         ai_player,
         ai_player,
     ):
-        label1.config(text="もうaiの勝ちでいいよ8")
+        button3.config(fg="#008000")
+        button5.config(fg="#008000")
+        button7.config(fg="#008000")
+
+        button1.config(state="disabled")
+        button2.config(state="disabled")
+        button4.config(state="disabled")
+        button6.config(state="disabled")
+        button8.config(state="disabled")
+        button9.config(state="disabled")
+
+        label3.config(text="AIの勝利！")
 
 
 def riset():
@@ -264,6 +593,26 @@ def riset():
     button8.config(text="")
     button9.config(text="")
 
+    button1.config(state="normal")
+    button2.config(state="normal")
+    button3.config(state="normal")
+    button4.config(state="normal")
+    button5.config(state="normal")
+    button6.config(state="normal")
+    button7.config(state="normal")
+    button8.config(state="normal")
+    button9.config(state="normal")
+
+    button1.config(fg="black")
+    button2.config(fg="black")
+    button3.config(fg="black")
+    button4.config(fg="black")
+    button5.config(fg="black")
+    button6.config(fg="black")
+    button7.config(fg="black")
+    button8.config(fg="black")
+    button9.config(fg="black")
+
     label1.config(text="")
     order_action()
 
@@ -275,21 +624,21 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ１")
+        label3.config(text="AIがリーチ！")
 
     if (button2.cget("text"), button3.cget("text"), button1.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ１")
+        label3.config(text="AIがリーチ！")
 
     if (button1.cget("text"), button3.cget("text"), button2.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ１")
+        label3.config(text="AIがリーチ！")
 
     # 横２列目
     if (button4.cget("text"), button5.cget("text"), button6.cget("text")) == (
@@ -297,21 +646,21 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ２")
+        label3.config(text="AIがリーチ！")
 
     if (button5.cget("text"), button6.cget("text"), button4.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ２")
+        label3.config(text="AIがリーチ！")
 
     if (button4.cget("text"), button6.cget("text"), button5.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ２")
+        label3.config(text="AIがリーチ！")
 
     # 横３列目
     if (button7.cget("text"), button8.cget("text"), button9.cget("text")) == (
@@ -319,21 +668,21 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ３")
+        label3.config(text="AIがリーチ！")
 
     if (button8.cget("text"), button9.cget("text"), button7.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ３")
+        label3.config(text="AIがリーチ！")
 
     if (button7.cget("text"), button9.cget("text"), button8.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ３")
+        label3.config(text="AIがリーチ！")
 
     # 縦１列目
     if (button1.cget("text"), button4.cget("text"), button7.cget("text")) == (
@@ -341,21 +690,21 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ４")
+        label3.config(text="AIがリーチ！")
 
     if (button4.cget("text"), button7.cget("text"), button1.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ４")
+        label3.config(text="AIがリーチ！")
 
     if (button1.cget("text"), button7.cget("text"), button4.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ４")
+        label3.config(text="AIがリーチ！")
 
     # 縦２列目
     if (button2.cget("text"), button5.cget("text"), button8.cget("text")) == (
@@ -363,21 +712,21 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ５")
+        label3.config(text="AIがリーチ！")
 
     if (button5.cget("text"), button8.cget("text"), button2.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ５")
+        label3.config(text="AIがリーチ！")
 
     if (button2.cget("text"), button8.cget("text"), button5.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ５")
+        label3.config(text="AIがリーチ！")
 
     # 縦３列目
     if (button3.cget("text"), button6.cget("text"), button9.cget("text")) == (
@@ -385,21 +734,21 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ６")
+        label3.config(text="AIがリーチ！")
 
     if (button6.cget("text"), button9.cget("text"), button3.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ６")
+        label3.config(text="AIがリーチ！")
 
     if (button3.cget("text"), button9.cget("text"), button6.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ６")
+        label3.config(text="AIがリーチ！")
 
     # 斜め１個目
     if (button1.cget("text"), button5.cget("text"), button9.cget("text")) == (
@@ -407,21 +756,21 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ７")
+        label3.config(text="AIがリーチ！")
 
     if (button5.cget("text"), button9.cget("text"), button1.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ７")
+        label3.config(text="AIがリーチ！")
 
     if (button1.cget("text"), button9.cget("text"), button5.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ７")
+        label3.config(text="AIがリーチ！")
 
     # 斜め２個目
     if (button3.cget("text"), button5.cget("text"), button7.cget("text")) == (
@@ -429,21 +778,638 @@ def ai_reach():
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ８")
+        label3.config(text="AIがリーチ！")
 
     if (button5.cget("text"), button7.cget("text"), button3.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ８")
+        label3.config(text="AIがリーチ！")
 
     if (button3.cget("text"), button7.cget("text"), button5.cget("text")) == (
         ai_player,
         ai_player,
         "",
     ):
-        label2.config(text="もうaiのリーチでいいよ８")
+        label3.config(text="AIがリーチ！")
+
+
+def ai_action_check():
+    check = 0
+
+    if (button1.cget("text"), button2.cget("text"), button3.cget("text")) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 25
+        draw_check()
+
+    if (
+        button2.cget("text"),
+        button3.cget("text"),
+        button1.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 26
+        draw_check()
+
+    if (
+        button1.cget("text"),
+        button3.cget("text"),
+        button2.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 27
+        draw_check()
+
+    # 横２列目
+    if (
+        button4.cget("text"),
+        button5.cget("text"),
+        button6.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 28
+        draw_check()
+
+    if (
+        button5.cget("text"),
+        button6.cget("text"),
+        button4.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 29
+        draw_check()
+
+    if (
+        button4.cget("text"),
+        button6.cget("text"),
+        button5.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 30
+        draw_check()
+
+    # 横３列目
+    if (
+        button7.cget("text"),
+        button8.cget("text"),
+        button9.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 31
+        draw_check()
+
+    if (
+        button8.cget("text"),
+        button9.cget("text"),
+        button7.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 32
+        draw_check()
+
+    if (
+        button7.cget("text"),
+        button9.cget("text"),
+        button8.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 33
+        draw_check()
+
+    # 縦１列目
+    if (
+        button1.cget("text"),
+        button4.cget("text"),
+        button7.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 34
+        draw_check()
+
+    if (
+        button4.cget("text"),
+        button7.cget("text"),
+        button1.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 35
+        draw_check()
+
+    if (
+        button1.cget("text"),
+        button7.cget("text"),
+        button4.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 36
+        draw_check()
+
+    # 縦２列目
+    if (
+        button2.cget("text"),
+        button5.cget("text"),
+        button8.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 37
+        draw_check()
+
+    if (
+        button5.cget("text"),
+        button8.cget("text"),
+        button2.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 38
+        draw_check()
+
+    if (
+        button2.cget("text"),
+        button8.cget("text"),
+        button5.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 39
+        draw_check()
+
+    # 縦３列目
+    if (
+        button3.cget("text"),
+        button6.cget("text"),
+        button9.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 40
+        draw_check()
+
+    if (
+        button6.cget("text"),
+        button9.cget("text"),
+        button3.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 41
+        draw_check()
+
+    if (
+        button3.cget("text"),
+        button9.cget("text"),
+        button6.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 42
+        draw_check()
+
+    # 斜め１個目
+    if (
+        button1.cget("text"),
+        button5.cget("text"),
+        button9.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 43
+        draw_check()
+
+    if (
+        button5.cget("text"),
+        button9.cget("text"),
+        button1.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 44
+        draw_check()
+
+    if (
+        button1.cget("text"),
+        button9.cget("text"),
+        button5.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 45
+        draw_check()
+
+    # 斜め２個目
+    if (
+        button3.cget("text"),
+        button5.cget("text"),
+        button7.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 46
+        draw_check()
+
+    if (
+        button5.cget("text"),
+        button7.cget("text"),
+        button3.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 47
+        draw_check()
+
+    if (
+        button3.cget("text"),
+        button7.cget("text"),
+        button5.cget("text"),
+    ) == (
+        human_player,
+        human_player,
+        "",
+    ):
+        check = 48
+        draw_check()
+
+    if (button1.cget("text"), button2.cget("text"), button3.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 1
+
+    if (button2.cget("text"), button3.cget("text"), button1.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 2
+
+    if (button1.cget("text"), button3.cget("text"), button2.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 3
+
+    # 横２列目
+    if (button4.cget("text"), button5.cget("text"), button6.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 4
+
+    if (button5.cget("text"), button6.cget("text"), button4.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 5
+
+    if (button4.cget("text"), button6.cget("text"), button5.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 6
+
+    # 横３列目
+    if (button7.cget("text"), button8.cget("text"), button9.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 7
+
+    if (button8.cget("text"), button9.cget("text"), button7.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 8
+
+    if (button7.cget("text"), button9.cget("text"), button8.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 9
+
+    # 縦１列目
+    if (button1.cget("text"), button4.cget("text"), button7.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 10
+
+    if (button4.cget("text"), button7.cget("text"), button1.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 11
+
+    if (button1.cget("text"), button7.cget("text"), button4.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 12
+
+    # 縦２列目
+    if (button2.cget("text"), button5.cget("text"), button8.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 13
+
+    if (button5.cget("text"), button8.cget("text"), button2.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 14
+
+    if (button2.cget("text"), button8.cget("text"), button5.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 15
+
+    # 縦３列目
+    if (button3.cget("text"), button6.cget("text"), button9.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 16
+
+    if (button6.cget("text"), button9.cget("text"), button3.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 17
+
+    if (button3.cget("text"), button9.cget("text"), button6.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 18
+
+    # 斜め１個目
+    if (button1.cget("text"), button5.cget("text"), button9.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 19
+
+    if (button5.cget("text"), button9.cget("text"), button1.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 20
+
+    if (button1.cget("text"), button9.cget("text"), button5.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 21
+
+    # 斜め２個目
+    if (button3.cget("text"), button5.cget("text"), button7.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 22
+
+    if (button5.cget("text"), button7.cget("text"), button3.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 23
+
+    if (button3.cget("text"), button7.cget("text"), button5.cget("text")) == (
+        ai_player,
+        ai_player,
+        "",
+    ):
+        check = 24
+
+    if check == 0:
+        ai_action()
+
+    if check == 1:
+        button3.config(text=ai_player)
+
+    if check == 2:
+        button1.config(text=ai_player)
+
+    if check == 3:
+        button2.config(text=ai_player)
+
+    if check == 4:
+        button6.config(text=ai_player)
+
+    if check == 5:
+        button4.config(text=ai_player)
+
+    if check == 6:
+        button5.config(text=ai_player)
+
+    if check == 7:
+        button9.config(text=ai_player)
+
+    if check == 8:
+        button7.config(text=ai_player)
+
+    if check == 9:
+        button8.config(text=ai_player)
+
+    if check == 10:
+        button7.config(text=ai_player)
+
+    if check == 11:
+        button1.config(text=ai_player)
+
+    if check == 12:
+        button4.config(text=ai_player)
+
+    if check == 13:
+        button8.config(text=ai_player)
+
+    if check == 14:
+        button2.config(text=ai_player)
+
+    if check == 15:
+        button5.config(text=ai_player)
+
+    if check == 16:
+        button9.config(text=ai_player)
+
+    if check == 17:
+        button3.config(text=ai_player)
+
+    if check == 18:
+        button6.config(text=ai_player)
+
+    if check == 19:
+        button9.config(text=ai_player)
+
+    if check == 20:
+        button1.config(text=ai_player)
+
+    if check == 21:
+        button5.config(text=ai_player)
+
+    if check == 22:
+        button7.config(text=ai_player)
+
+    if check == 23:
+        button3.config(text=ai_player)
+
+    if check == 24:
+        button5.config(text=ai_player)
+
+    if check == 25:
+        button3.config(text=ai_player)
+
+    if check == 26:
+        button1.config(text=ai_player)
+
+    if check == 27:
+        button2.config(text=ai_player)
+
+    if check == 28:
+        button6.config(text=ai_player)
+
+    if check == 29:
+        button4.config(text=ai_player)
+
+    if check == 30:
+        button5.config(text=ai_player)
+
+    if check == 31:
+        button9.config(text=ai_player)
+
+    if check == 32:
+        button7.config(text=ai_player)
+
+    if check == 33:
+        button8.config(text=ai_player)
+
+    if check == 34:
+        button7.config(text=ai_player)
+
+    if check == 35:
+        button1.config(text=ai_player)
+
+    if check == 36:
+        button4.config(text=ai_player)
+
+    if check == 37:
+        button8.config(text=ai_player)
+
+    if check == 38:
+        button2.config(text=ai_player)
+
+    if check == 39:
+        button5.config(text=ai_player)
+
+    if check == 40:
+        button9.config(text=ai_player)
+
+    if check == 41:
+        button3.config(text=ai_player)
+
+    if check == 42:
+        button6.config(text=ai_player)
+
+    if check == 43:
+        button9.config(text=ai_player)
+
+    if check == 44:
+        button1.config(text=ai_player)
+
+    if check == 45:
+        button5.config(text=ai_player)
+
+    if check == 46:
+        button7.config(text=ai_player)
+
+    if check == 47:
+        button3.config(text=ai_player)
+
+    if check == 48:
+        button5.config(text=ai_player)
 
 
 label1 = tk.Label(window, text="円罰ゲーム", bg=bg_color, fg=fg_color)
@@ -452,11 +1418,15 @@ label1.pack(pady=10)
 label2 = tk.Label(window, text="あなたは円です", bg=bg_color, fg=fg_color)
 label2.pack(pady=10)
 
+label3 = tk.Label(window, text="スタート！", bg=bg_color, fg=fg_color)
+label3.pack(pady=10)
+
 riset_button = tk.Button(window, text="リセット", command=riset)
 riset_button.pack(pady=10)
 
 frame = tk.Frame(window)
 frame.pack()
+
 
 #  ボタンの作成
 button1 = tk.Button(frame, text="", command=button_action)
