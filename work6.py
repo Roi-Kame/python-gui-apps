@@ -180,6 +180,7 @@ def button_action():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -190,6 +191,7 @@ def button_action2():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -200,6 +202,7 @@ def button_action3():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -210,6 +213,7 @@ def button_action4():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -220,6 +224,7 @@ def button_action5():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -230,6 +235,7 @@ def button_action6():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -240,6 +246,7 @@ def button_action7():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -250,6 +257,7 @@ def button_action8():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -260,6 +268,7 @@ def button_action9():
         draw_check()
         victory()
         ai_action_check()
+        ai_reach()
         ai_victory()
 
 
@@ -1444,7 +1453,6 @@ riset_button.pack(pady=10)
 
 frame = tk.Frame(window)
 frame.pack()
-
 
 #  ボタンの作成
 button1 = tk.Button(frame, text="", command=button_action)
