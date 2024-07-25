@@ -1218,9 +1218,9 @@ def ai_action_check():
         check = 16
 
     if (button6.cget("text"), button9.cget("text"), button3.cget("text")) == (
-        ai_player,
-        ai_player,
         "",
+        ai_player,
+        ai_player,
     ):
         check = 17
 
